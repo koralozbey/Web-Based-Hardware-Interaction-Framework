@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    {% set nj = namespace(today = datetime.now()) %}
+    {% set period = setup.period_of_res %}
+    {% set setup_id = setup.id %}
+    {% set nmbr_of_slots = (timedelta(days=1)/timedelta(minutes=period)) | int %}
+    {% set setup_resevartions = [] %}
+    {% for res in setup.reservations.all() %}
+        {{ setup_resevartions.append(res.res_date) or "" }}
+    {% endfor %}
+
+    <h1>Reservation System</h1>
+    <form autocomplete="off" action="/successful_reservations" method="post">
+        <input type="hidden" name="setup_ID" value="{{ setup_id }}">
+        <table>
+            <tr>
+                {% for i in range(7) %}
+                    <td>
+                        <ul>
+                            <li>
+                                <h3>{{ nj.today.date() }}</h3>
+                                {% set ns = namespace(start = nj.today.replace(hour=0,minute=0,second=0,microsecond=0)) %}
+                                {% for j in range(nmbr_of_slots) %}
+                                    {% set end = ns.start + timedelta(minutes=period) %}
+                                    {% if ns.start < datetime.now() or ns.start in setup_resevartions %}
+                                        <input type="checkbox" name="check" value="{{ ns.start.strftime('%Y-%m-%d %H:%M') }}" disabled>
+                                        <label style="color:red" for="check">{{ ns.start.strftime('%H:%M') }}{{ "-" }}{{ end.strftime('%H:%M') }}</label><br>
+                                    {% else %}
+                                        <input type="checkbox" name="check" value="{{ ns.start.strftime('%Y-%m-%d %H:%M') }}">{{ ns.start.strftime('%H:%M') }}{{ "-" }}{{ end.strftime('%H:%M') }}<br>
+                                    {% endif %}
+                                    {% set ns.start = ns.start + timedelta(minutes=period) %}
+                                {% endfor %}
+                                {% set nj.today = nj.today + timedelta(days=1) %}
+                            </li>
+                        </ul>
+                    </td>
+                {% endfor %}
+            </tr>
+        </table>
+        <input style="font-size:150%" type="submit" value="Make Reservation!">
+    </form>
+
+{% endblock %}

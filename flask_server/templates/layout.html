@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <title>Distant Hardware System</title>    
+    </head>
+    <body onunload="">
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('main_menu') }}" ><input style="font-size:140%;background-color:aliceblue" type="button" name="home" value="Home Page"></a>
+        <a href="{{ url_for('my_reservations') }}" ><input style="font-size:140%;background-color:mediumseagreen" type="button" name="my_reservations" value="My Reservations"></a>
+        <a href="{{ url_for('logout') }}"><input style="font-size:140%;background-color:lightcoral;float:right" type="button" name="logout" value="Logout"></a>
+            {% if current_user.is_admin %}
+            <a href="{{ url_for('admin_panel') }}"><input style="font-size:140%;background-color:slategray" type="button" name="admin_panel" value="Admin Panel"></a>
+            {% endif %}
+        {% else %}
+        <a href="{{ url_for('login') }}"><input style="font-size:140%;background-color:greenyellow" type="button" name="login" value="Login"></a>
+        <a href="{{ url_for('register') }}"><input style="font-size:140%;background-color:greenyellow" type="button" name="register" value="Register"></a>
+        {% endif %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block body %}{% endblock %}
+
+    </body>
+</html>

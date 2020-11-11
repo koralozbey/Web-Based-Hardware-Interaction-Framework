@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <h1 align="center">Reservation System</h1><br>
+    <form align="center" autocomplete="off" action="/schedule" method="post">
+        <label style="font-size:150%" for="choosen_setup">Choose a setup:</label>
+        <select style="font-size:150%" name="choosen_setup">
+            {% for course in courses %}
+                <optgroup label="{{ course.name }}">
+                    {% for experiment in course.experiments.all() %}
+                        <optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;{{ experiment.name }}">
+                            {% for stp in experiment.setups.all() %}
+                                <option value="{{ stp.id }}">&nbsp;&nbsp;&nbsp;&nbsp;{{ stp.name }}</option>
+                            {% endfor%}
+                        </optgroup>
+                    {% endfor %}
+                </optgroup>
+            {% endfor %}
+        </select>
+        <br><br><br>
+        <input style="font-size:150%" type="submit" value="Choose">
+    </form>
+
+{% endblock %}

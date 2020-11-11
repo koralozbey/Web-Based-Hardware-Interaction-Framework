@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <h1 align="center">Reservation System</h1><br>
+    {% if successful_reservations|length == 0 %}
+        <p style="font-size:160%" align="center">No Reservation Has Been Made</p><br>
+    {% elif successful_reservations|length == 1 %}
+        <p style="font-size:160%" align="center">Made Reservation:</p><br>
+        <p style="font-size:130%" align="center">{{ successful_reservations[0] }}</p><br>
+    {% else %}
+        <p style="font-size:160%" align="center">Made Reservations:</p><br>
+        {% for res in successful_reservations %}
+            <p style="font-size:130%" align="center">{{ res }}</p>
+        {% endfor %}
+        <br>
+    {% endif %}
+    <p style="font-size:130%" align="center"><a href={{ url_for('main_menu') }} ><input type="button" name="home" value="Go back to Home Page"></a></p>
+
+{% endblock %}

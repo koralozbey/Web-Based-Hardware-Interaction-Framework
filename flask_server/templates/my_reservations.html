@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <h1>My Reservations</h1>
+    <form autocomplete="off" action="/cancel_reservation" method="post">
+        {% for res in my_res %}
+            {% if res.res_date < now %}
+                <input type="checkbox" name="check" value="{{ res.id }}" disabled>
+                <label style="color:red" for="check">{{ res.owner.owner.owner.name }}{{ "-" }}{{ res.owner.owner.name }}{{ "-" }}{{ res.owner.name }}{{ "-    " }}{{ "(" }}{{ res.res_date.strftime('%Y-%m-%d %H:%M') }}{{ ")" }}{{ "-" }}{{ "Finished" }}</label><br>
+            {% else %}
+                <input type="checkbox" name="check" value="{{ res.id }}">{{ res.owner.owner.owner.name }}{{ "-" }}{{ res.owner.owner.name }}{{ "-" }}{{ res.owner.name }}{{ "-    " }}{{ "(" }}{{ res.res_date.strftime('%Y-%m-%d %H:%M') }}{{ ")" }}{{ "-" }}{{ "Upcoming" }}<br>
+            {% endif %}
+        {% endfor %}
+        <input style="font-size:150%;background-color:firebrick" type="submit" value="CANCEL!">
+    </form>
+
+{% endblock %}

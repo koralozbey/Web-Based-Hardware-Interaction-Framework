@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <br><br>
+    <h1 style="text-align:center">Create an Account</h1>
+    <br><br>
+    <form autocomplete="off" action="" method="POST">
+        {{ form.hidden_tag() }}
+        <p align="center">
+            {{ form.username.label() }}
+            {% if form.username.errors %}
+                {{ form.username() }}
+                {% for error in form.username.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            {% else %}
+                {{ form.username() }}
+            {% endif %}
+        </p><br><br>
+        <p align="center">
+            {{ form.email.label() }}
+            {% if form.email.errors %}
+                {{ form.email() }}
+                {% for error in form.email.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            {% else %}
+                {{ form.email() }}
+            {% endif %}
+        </p><br><br>
+        <p align="center">
+            {{ form.password.label() }}
+            {% if form.password.errors %}
+                {{ form.password() }}
+                {% for error in form.password.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            {% else %}
+                {{ form.password() }}
+            {% endif %}
+        </p><br><br>
+        <p align="center">
+            {{ form.confirm_password.label() }}
+            {% if form.confirm_password.errors %}
+                {{ form.confirm_password() }}
+                {% for error in form.confirm_password.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            {% else %}
+                {{ form.confirm_password() }}
+            {% endif %}
+        </p><br><br>
+        <p align="center">
+            {{ form.submit() }}
+        </p><br><br>
+    </form>
+    <p align="center">
+        <h5 style="text-align:center">Already Have an Account?<a href="{{ url_for('login') }}"> Sign In</a></h5>
+    </p>
+{% endblock %}
