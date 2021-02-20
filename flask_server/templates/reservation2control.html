@@ -3,9 +3,9 @@
 {% block body %}
 
     <h1 align="center">Reservation System</h1><br>
-    <form align="center" autocomplete="off" action="{{ url_for('schedule') }}" method="post">
-        <label style="font-size:150%" for="chosen_setup">Choose a setup:</label>
-        <select style="font-size:150%" name="chosen_setup">
+    <form align="center" autocomplete="off" action="/schedule" method="post">
+        <label style="font-size:150%" for="choosen_setup">Choose a setup:</label>
+        <select style="font-size:150%" name="choosen_setup">
             {% for course in courses %}
                 <optgroup label="{{ course.name }}">
                     {% for experiment in course.experiments.all() %}

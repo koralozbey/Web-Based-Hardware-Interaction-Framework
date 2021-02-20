@@ -4,8 +4,8 @@
     
     <h1  align="center">Welcome to Web Based Hardware Interaction Framework</h1>
     <br>
-    <p align="center"><a href=choose_setup ><input style="font-size:130%" type="button" name="reservation" value="Schedule & Reservation"></a></p><br>
-    <p align="center"><a href=jupyternotebook ><input style="font-size:130%" type="button" name="jupyter" value="Jupyter Notebook"></a></p><br>
+    <p align="center"><a href="{{ url_for('choose_setup') }}" ><input style="font-size:130%" type="button" name="reservation" value="Schedule & Reservation"></a></p><br>
+    <p align="center"><a href="{{ url_for('jupyternotebook') }}" ><input style="font-size:130%" type="button" name="jupyter" value="Jupyter Notebook"></a></p><br>
 
 
 {% endblock %}

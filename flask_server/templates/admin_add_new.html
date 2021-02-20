@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <br><br>
+    <h1 style="text-align:center">Add New Course &amp; Experiment &amp; Material &amp; Setup</h1>
+    <br><br>
+    <form autocomplete="off" action="" method="POST">
+        <label style="font-size:150%" for="course_name">New Course Name:</label>
+        <input style="font-size:150%" type="text" name="course_name">
+        <input style="font-size:150%;background-color:mediumseagreen" type="submit" name='submit' value="Create Course">
+    </form>
+    
+    <br><hr style="border:5px solid cadetblue;"><br>
+    <form autocomplete="off" action="" method="POST">
+        <label style="font-size:150%" for="choosen_course">Choose a Course:</label>
+        <select style="font-size:150%" name="choosen_course">
+            {% for course in courses %}
+                <option value="{{ course.id }}">{{ course.name }}</option>
+            {% endfor %}
+        </select>
+        <label style="font-size:150%" for="experiment_name">New Experiment Name:</label>
+        <input style="font-size:150%" type="text" name="experiment_name">
+        <input style="font-size:150%;background-color:mediumseagreen" type="submit" name='submit' value="Create Experiment">
+    </form>
+    
+    <br><hr style="border:5px solid cadetblue;"><br>
+    <form autocomplete="off" enctype="multipart/form-data" method="POST">
+        <label style="font-size:150%" for="choosen_experiment">Choose an Experiment:</label>
+        <select style="font-size:150%" name="choosen_experiment">
+            {% for course in courses %}
+                <optgroup label="{{ course.name }}">
+                    {% for experiment in course.experiments.all() %}
+                        <option value="{{ experiment.id }}">{{ experiment.name }}</option>
+                    {% endfor %}
+                </optgroup>
+            {% endfor %}
+        </select>
+        <input style="font-size:150%" type="file" name="file">
+        <input style="font-size:150%;background-color:mediumseagreen" type="submit" name='submit' value="Upload Material">
+    </form>
+    
+    <br><hr style="border:5px solid cadetblue;"><br>
+    <form autocomplete="off" action="" method="POST">
+        <label style="font-size:150%" for="choosen_experiment">Choose an Experiment:</label>
+        <select style="font-size:150%" name="choosen_experiment">
+            {% for course in courses %}
+                <optgroup label="{{ course.name }}">
+                    {% for experiment in course.experiments.all() %}
+                        <option value="{{ experiment.id }}">{{ experiment.name }}</option>
+                    {% endfor %}
+                </optgroup>
+            {% endfor %}
+        </select>
+        <label style="font-size:150%" for="setup_name">New Setup Name:</label>
+        <input style="font-size:150%" type="text" name="setup_name">
+        <label style="font-size:150%" for="choosen_port">Choose the Setup Port:</label>
+        <select style="font-size:150%" name="choosen_port">
+            {% for port in ports %}
+                <option value="{{ port }}">{{ port }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label style="font-size:150%" for="period_of_res">Period of Reservation:</label>
+        <input style="font-size:150%" type="number" name="period_of_res" min="5" max="150" step="5" value="15">
+        <label style="font-size:150%" for="max_res_for_week">Max Reservation for a Week:(currently not working)</label>
+        <input style="font-size:150%" type="number" name="max_res_for_week" min="1" max="10" value="1">
+        <input style="font-size:150%;background-color:mediumseagreen" type="submit" name='submit' value="Create Setup">
+    </form>
+{% endblock %}

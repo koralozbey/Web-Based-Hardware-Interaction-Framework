@@ -4,9 +4,10 @@
 
     <h1  align="center">Admin Panel</h1>
     <br>
-    <p align="center"><a href="" ><input style="font-size:130%" type="button" name="reservation" value="Control Reservations"></a></p><br>
-    <p align="center"><a href="" ><input style="font-size:130%" type="button" name="jupyter" value="Add New Course & Experiment & Setup"></a></p><br>
-    <p align="center"><a href="" ><input style="font-size:130%" type="button" name="jupyter" value="Delete Course & Experiment & Setup"></a></p><br>
+    <p align="center"><a href="{{ url_for('subcategory2control') }}" ><input style="font-size:130%" type="button" name="reservation" value="Control Reservations"></a></p><br>
+    <p align="center"><a href="{{ url_for('add_new') }}" ><input style="font-size:130%" type="button" name="add_new" value="Add New Course & Experiment & Material & Setup"></a></p><br>
+    <p align="center"><a href="{{ url_for('delete_model') }}" ><input style="font-size:130%" type="button" name="jupyter" value="Delete Course & Experiment & Material & Setup"></a></p><br>
+    <p align="center"><a href="{{ url_for('download_materials') }}" ><input style="font-size:130%" type="button" name="material" value="Download Materials"></a></p><br>
 
 
 {% endblock %}

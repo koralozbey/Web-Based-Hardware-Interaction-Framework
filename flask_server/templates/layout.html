@@ -18,12 +18,16 @@
         <a href="{{ url_for('login') }}"><input style="font-size:140%;background-color:greenyellow" type="button" name="login" value="Login"></a>
         <a href="{{ url_for('register') }}"><input style="font-size:140%;background-color:greenyellow" type="button" name="register" value="Register"></a>
         {% endif %}
+        <br><br>
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">
-                        {{ message }}
-                    </div>
+                    {% if category == 'success' %}
+                        {% set colour = 'lightgreen' %}
+                    {% else %}
+                        {% set colour = 'lightcoral' %}
+                    {% endif %}
+                    <li style="font-size:130%;background-color:{{ colour }}">{{ message }}</li>
                 {% endfor %}
             {% endif %}
         {% endwith %}

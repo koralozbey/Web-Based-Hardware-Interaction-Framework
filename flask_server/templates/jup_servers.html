@@ -8,7 +8,7 @@
     {% else %}
         {% for res in current_reservations %}
             {% if res.is_started == False %}
-                <p align="center"><a href={{ url_for('jup_server_starter',res_id=res.id) }} ><input style="font-size:140%;background-color:aquamarine" type="button" name="starter" value="Start Jupyter Server for {{res.owner.owner.owner.name}}{{'-'}}{{res.owner.owner.name}}{{'-'}}{{res.owner.name}}"></a></p><br>
+                <p align="center"><a href={{ url_for('jup_server_starter',res_id=res.id) }} ><input style="font-size:140%;background-color:aquamarine" type="button" name="starter" value="Start Jupyter Server for {{res.owner.owner.owner.name}}{{'-'}}{{res.owner.owner.name}}{{'-'}}{{res.owner.name}} (Starts in 7 seconds!)"></a></p><br>
             {% else %}
                 <p align="center"><a href=http://{{ip_adress}}:{{ res.owner.id + 8800 }} ><input style="font-size:140%;background-color:greenyellow" type="button" name="redirector" value="Go to Jupyter Server for {{res.owner.owner.owner.name}}{{'-'}}{{res.owner.owner.name}}{{'-'}}{{res.owner.name}}"></a></p><br>
             {% endif %}

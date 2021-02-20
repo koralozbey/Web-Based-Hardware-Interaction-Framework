@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <br><br>
+    <h1 style="text-align:center">Delete Course &amp; Experiment &amp; Material &amp; Setup</h1>
+    <br><br>    
+    <br><br>
+    <form autocomplete="off" action="" method="POST">
+        <label style="font-size:150%" for="chosen_course">Choose a Course:</label>
+        <select style="font-size:150%" name="chosen_course">
+            {% for course in courses %}
+                <option value="{{ course.id }}">{{ course.name }}</option>
+            {% endfor %}
+        </select>
+        <input style="font-size:150%;background-color:lightcoral" type="submit" name='submit' value="Delete Course">
+    </form>
+    
+    <br><hr style="border:5px solid sienna;"><br>
+    <form autocomplete="off" action="" method="POST">
+        <label style="font-size:150%" for="chosen_experiment">Choose an Experiment:</label>
+        <select style="font-size:150%" name="chosen_experiment">
+            {% for course in courses %}
+                <optgroup label="{{ course.name }}">
+                {% for experiment in course.experiments.all() %}
+                    <option value="{{ experiment.id }}">{{ experiment.name }}</option>
+                {% endfor %}
+                </optgroup>
+            {% endfor %}
+        </select>
+        <input style="font-size:150%;background-color:lightcoral" type="submit" name='submit' value="Delete Experiment">
+    </form>
+    
+    <br><hr style="border:5px solid sienna;"><br>
+    <form autocomplete="off" action="" method="POST">
+        <label style="font-size:150%" for="chosen_material">Choose a Material:</label>
+        <select style="font-size:150%" name="chosen_material">
+            {% for course in courses %}
+                <optgroup label="{{ course.name }}">
+                {% for experiment in course.experiments.all() %}
+                    <optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;{{ experiment.name }}">
+                    {% for material in experiment.materials.all() %}
+                        <option value="{{ material.id }}">&nbsp;&nbsp;&nbsp;&nbsp;{{ material.name }}</option>
+                    {% endfor %}
+                    </optgroup>
+                {% endfor %}
+                </optgroup>
+            {% endfor %}
+        <input style="font-size:150%;background-color:lightcoral" type="submit" name='submit' value="Delete Material">
+    </form>
+    
+    <br><hr style="border:5px solid sienna;"><br>
+    <form autocomplete="off" action="" method="POST">
+        <label style="font-size:150%" for="chosen_setup">Choose a Setup:</label>
+        <select style="font-size:150%" name="chosen_setup">
+            {% for course in courses %}
+                <optgroup label="{{ course.name }}">
+                {% for experiment in course.experiments.all() %}
+                    <optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;{{ experiment.name }}">
+                    {% for setup in experiment.setups.all() %}
+                        <option value="{{ setup.id }}">&nbsp;&nbsp;&nbsp;&nbsp;{{ setup.name }}</option>
+                    {% endfor %}
+                    </optgroup>
+                {% endfor %}
+                </optgroup>
+            {% endfor %}
+        <input style="font-size:150%;background-color:lightcoral" type="submit" name='submit' value="Delete Setup">
+    </form>
+{% endblock %}

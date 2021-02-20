@@ -12,5 +12,8 @@ bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
+UPLOAD_FOLDER = '/uploads' #Create this directory in working directory
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 from flask_server import routes
 

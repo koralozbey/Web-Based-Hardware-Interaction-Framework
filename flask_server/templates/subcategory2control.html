@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <h1 align="center">Choose a Subcategory</h1><br>
+    <form align="center" autocomplete="off" action="{{ url_for('reservation2control') }}" method="post">
+        <label style="font-size:150%" for="chosen_subcategory">Choose a subcategory:</label>
+        <select style="font-size:150%" name="chosen_subcategory">
+            {% for course in courses %}
+                <option style="font-size:110%;font-weight:bold" value="course={{ course.id }}">{{ course.name }}</option>
+                    {% for experiment in course.experiments.all() %}
+                        <option value="experiment={{ experiment.id }}">--&nbsp;&nbsp;{{ experiment.name }}</option>
+                            {% for stp in experiment.setups.all() %}
+                                <option style="font-size:90%;font-style:italic"value="setup={{ stp.id }}">----&nbsp;&nbsp;&nbsp;&nbsp;{{ stp.name }}</option>
+                            {% endfor%}
+                    {% endfor %}
+            {% endfor %}
+        </select>
+        <br><br><br>
+        <input style="font-size:150%" type="submit" value="Choose">
+    </form>
+    
+    <h1 align="center">Or Choose a Person</h1><br>
+    <form align="center" autocomplete="off" action="{{ url_for('reservation2control') }}" method="post">
+        <label style="font-size:150%" for="chosen_subcategory">Choose a person:</label>
+        <select style="font-size:150%" name="chosen_subcategory">
+            {% for user in users %}
+                <option value="person={{ user.id }}">{{ user.username }}</option>
+            {% endfor %}
+        </select>
+        <br><br><br>
+        <input style="font-size:150%" type="submit" value="Choose">
+    </form>
+
+{% endblock %}
